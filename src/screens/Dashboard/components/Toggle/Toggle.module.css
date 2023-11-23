@@ -1,0 +1,29 @@
+.container {
+	display: flex;
+  gap: 10px; 
+	max-width: 200px;
+  width: 100%;
+	padding: 8px 30px 8px 8px;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 10px;
+	border: 3px solid #1f1f1f;
+	background: rgba(15, 15, 15, 0.56);
+}
+
+.buttonLayout {
+  flex-grow: 1;
+	display: flex;
+	padding: 12px 20px;
+	align-items: center;
+	gap: 10px;
+	border: 1px solid transparent;
+	color: white;
+  transition: all 0.2s;
+}
+
+.buttonActive {
+	border-radius: 8px;
+	border: 1px solid var(--black-10, #1a1a1a);
+	background: #e50000;
+}
