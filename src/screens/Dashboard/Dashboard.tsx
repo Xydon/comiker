@@ -19,16 +19,8 @@ function Dashboard() {
 		tabs: "panel",
 		stage: {
 			circle: [],
-			rectangle: [
-				{
-					id: Math.random().toString(),
-					x: 200,
-					y: 80,
-					width: 20,
-					height: 20,
-					fill: "black",
-				},
-			],
+			rectangle: [],
+			text: [],
 			selectedId: null,
 		},
 		loading: {},
@@ -83,6 +75,14 @@ function Dashboard() {
 						>
 							rectangle
 						</button>
+						<br />
+						<button
+							onClick={() => {
+								actions.addText();
+							}}
+						>
+							text
+						</button>
 					</div>
 				</div>
 				<div
@@ -97,19 +97,6 @@ function Dashboard() {
 						onTouchStart={checkDeselect}
 					>
 						<Layer>
-							<SelectableText
-								shapeProps={{
-									text: "this is a text",
-								}}
-								isSelected={
-									true
-								}
-								onSelect={(attr) => {}}
-								onChange={(attr) => {}}
-								onDelete={function (id?: string | undefined): void {
-									actions.deleteShape(id);
-								}}
-							/>
 							{state.stage.circle.map((v, i) => (
 								<Circ
 									key={v.id}
@@ -142,6 +129,26 @@ function Dashboard() {
 									onChange={(attr) => {
 										actions.transformRectangle(attr, i);
 									}}
+									onDelete={function (id?: string | undefined): void {
+										actions.deleteShape(id);
+									}}
+								/>
+							))}
+							{state.stage.text.map((v, i) => (
+								<SelectableText
+									key={v.id}
+									shapeProps={v}
+									isSelected={
+										state.stage.selectedId === null
+											? false
+											: state.stage.selectedId === v.id
+									}
+									onSelect={(attr) => {
+                    actions.setShapeAsSelectd(v.id || null);
+                  }}
+									onChange={(attr) => {
+                    actions.transformShape(attr, i, 'text');
+                  }}
 									onDelete={function (id?: string | undefined): void {
 										actions.deleteShape(id);
 									}}

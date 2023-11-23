@@ -34,10 +34,22 @@ export default class DashboardActions extends ServerStateUtils<DashboardTypes.St
 		});
 	}
 
+	addText() {
+		this.mutateState((v) => {
+			v.stage.text.push({
+				id: Math.random().toString(),
+				x: 100,
+				y: 100,
+				text: 'Text',
+				fill: "black",
+			});
+		});
+	}
+
 	transformShape(
 		attr: RectConfig,
 		indx: number,
-		shape: "circle" | "rectangle" = "rectangle"
+		shape: DashboardTypes.Shapes = "rectangle"
 	) {
 		try {
 			this.mutateState((v) => {
