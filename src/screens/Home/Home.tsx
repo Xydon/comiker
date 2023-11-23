@@ -21,11 +21,9 @@ function Home() {
 						"linear-gradient(180deg, rgba(20, 20, 20, 0.00) 0%, #141414 100%)",
 				}}
 			/>
-			<div
-				id="hero"
-				className={"flex flex-col min-h-screen z-10 "}
-				style={{ marginBottom: 100 }}
-			>
+
+			{/* hero section */}
+			<div id="hero" className={"flex flex-col min-h-screen z-10 "}>
 				<div className="z-50">
 					<Navbar />
 				</div>
@@ -69,10 +67,25 @@ function Home() {
 				</div>
 			</div>
 
-			<div id="explore">
-				
+			{/* explore section */}
+			<div id="explore" style={{ padding: "100px 80px" }}>
+				<div>
+					<div className="flex justify-between">
+						<div className="flex flex-col gap-y-3">
+							<p className="text-2xl font-semibold text-white">
+								Explore Community
+							</p>
+							<p className="text-neutral-300">
+								Whether you're looking for a comedy to make you laugh, a drama
+								to make you think, or a documentary to learn something new
+							</p>
+						</div>
+						<div>
+							
+						</div>
+					</div>
+				</div>
 			</div>
-
 		</div>
 	);
 }
