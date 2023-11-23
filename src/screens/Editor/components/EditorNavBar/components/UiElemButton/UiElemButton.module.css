@@ -1,0 +1,11 @@
+.container {
+  cursor: pointer;
+}
+
+.container p,svg {
+  transition: all 0.3s; 
+}
+
+.container:hover svg {
+  transform: scale(1.1);
+}
