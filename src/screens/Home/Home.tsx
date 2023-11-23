@@ -3,6 +3,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Home.module.css";
 import IconIndex from "@src/assets/assetIndex";
 import FeedBar from "@src/components/FeedBar/FeedBar";
+import { comicPrompts } from "@src/constants/constants";
+import IdeaChip from "./components/IdeaChip/IdeaChip";
 
 function Home() {
 	return (
@@ -19,7 +21,11 @@ function Home() {
 						"linear-gradient(180deg, rgba(20, 20, 20, 0.00) 0%, #141414 100%)",
 				}}
 			/>
-			<div id="hero" className={"flex flex-col min-h-screen z-10 "}>
+			<div
+				id="hero"
+				className={"flex flex-col min-h-screen z-10 "}
+				style={{ marginBottom: 100 }}
+			>
 				<div className="z-50">
 					<Navbar />
 				</div>
@@ -45,8 +51,28 @@ function Home() {
 					</div>
 
 					<FeedBar />
+
+					<div className="flex flex-col items-center gap-y-4">
+						<div className="flex gap-x-2">
+							<IconIndex.IdeaIcon />
+							<p className="text-md text-white">Don't have Ideas? Try These</p>
+						</div>
+
+						<div className="flex flex-wrap basis-3/4 gap-2">
+							{comicPrompts.map((v) => (
+								<IdeaChip>{v}</IdeaChip>
+							))}
+						</div>
+					</div>
+
+					<div></div>
 				</div>
 			</div>
+
+			<div id="explore">
+				
+			</div>
+
 		</div>
 	);
 }
