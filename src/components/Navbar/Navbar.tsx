@@ -2,8 +2,10 @@ import React from "react";
 import IconIndex from "../../assets/assetIndex";
 import NavButtonGroup from "./components/NavButtonGroup/NavButtonGroup";
 import { ButtonBase } from "@mui/material";
+import { useNavigation } from "react-router-dom";
 
 function Navbar() {
+
 	return (
 		<div
 			className="flex justify-between items-center"
@@ -13,7 +15,7 @@ function Navbar() {
 				<IconIndex.Logo />
 			</div>
 			<div>
-				<NavButtonGroup />
+				<NavButtonGroup currentLink={""} />
 			</div>
 
 			<div className="flex gap-x-2 justify-center">
