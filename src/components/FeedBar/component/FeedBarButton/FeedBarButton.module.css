@@ -1,0 +1,27 @@
+.buttonContainer {
+	display: flex;
+	width: 229px;
+	padding: 14px 20px;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	align-self: stretch;
+	border-radius: 12px;
+	background: linear-gradient(180deg, #e50000 0%, #7300e5 100%);
+	box-shadow: 19px 5px 35.5px 0px rgba(138, 1, 184, 0.3); 
+	outline: none
+}
+
+.buttonText {
+	color: var(--absolute-white, #fff);
+	font-family: Manrope;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%; /* 30px */
+	transition: outline 0.3s ease-in-out;
+}
+
+.buttonContainer:focus {
+	outline: 4px solid white;
+}

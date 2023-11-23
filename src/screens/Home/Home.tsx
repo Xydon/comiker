@@ -8,23 +8,27 @@ function Home() {
 	return (
 		<div className="bg-darkGray  min-w-full w-full">
 			<div
-				id="hero"
-				className={"flex flex-col min-h-screen " + styles.sectionHero}
-			>
-				<div
-					className="absolute w-full h-full "
-					style={{
-						background:
-							"linear-gradient(180deg, rgba(20, 20, 20, 0.00) 0%, #141414 100%)",
-						zIndex: -1,
-					}}
-				></div>
-				<Navbar />
-				<div className="grow" style={{ padding: 60 }}>
-					<div className="flex flex-col items-center gap-y-4">
-						<div className="animate-spin">
-							<IconIndex.LogoHome />
-						</div>
+				className={
+					"absolute w-full h-screen top-0 left-0 " + styles.sectionHero
+				}
+			/>
+			<div
+				className="absolute w-full h-full top-0 left-0"
+				style={{
+					background:
+						"linear-gradient(180deg, rgba(20, 20, 20, 0.00) 0%, #141414 100%)",
+				}}
+			/>
+			<div id="hero" className={"flex flex-col min-h-screen z-10 "}>
+				<div className="z-50">
+					<Navbar />
+				</div>
+				<div className="grow flex flex-col items-center gap-y-[40px] px-[150px] z-50">
+					<div className="animate-spin">
+						<IconIndex.LogoHome />
+					</div>
+
+					<div className="flex flex-col items-center gap-y-2">
 						<p className="text-4xl font-semibold text-white">
 							Create Your Own Comic Strip in Minutes Using AI
 						</p>
@@ -39,10 +43,7 @@ function Home() {
 							annotations, and other features.
 						</p>
 					</div>
-				</div>
 
-				
-				<div id="faq" className={"flex flex-col"}>
 					<FeedBar />
 				</div>
 			</div>
