@@ -11,11 +11,11 @@ def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
 	return response.content
 image_bytes = query({
-	"inputs": "Astronaut riding a horse",
+	"inputs": "Astronaut riding a rocket",
 })
 
 print(image_bytes)
-
+	
 # You can access the image with PIL.Image for example
 import io
 from PIL import Image
