@@ -13,7 +13,6 @@ import { ImageIndex } from "@src/assets/assetIndex";
 import { ImageConfig } from "konva/lib/shapes/Image";
 import { PDFDocument } from "pdf-lib";
 
-
 function Artboard(props: StageProps) {
 	const {
 		state: { ellipse, rectangle, text, selected, image },
@@ -32,11 +31,11 @@ function Artboard(props: StageProps) {
 	};
 
 	const exportToPng = () => {
-    if (stageRef.current) {
-      const dataURL = stageRef.current.toDataURL({ mimeType: 'image/png' });
-      downloadAsFile(dataURL, 'exported-image.png');
-    }
-  };
+		if (stageRef.current) {
+			const dataURL = stageRef.current.toDataURL({ mimeType: "image/png" });
+			downloadAsFile(dataURL, "exported-image.png");
+		}
+	};
 
 	const downloadAsFile2 = async (pdfBytes: Uint8Array, fileName: string) => {
 		const blob = new Blob([pdfBytes], { type: "application/pdf" });
@@ -93,6 +92,26 @@ function Artboard(props: StageProps) {
 			onTouchStart={(e) => actions.setSelectionBlur(e)}
 		>
 			<Layer>
+				{Object.entries(image).map((v) => {
+					console.log(v);
+					return (
+						<CImage
+							shapeProps={v[1]}
+							isSelected={selected ? selected.id === v[0] : false}
+							onSelect={function (): void {
+								actions.setSelection({
+									id: v[0],
+									shape: "image",
+								});
+							}}
+							onChange={function (arrt: ImageConfig): void {
+								actions.transformImage(v[0], arrt);
+							}}
+							onDelete={function (id?: string | undefined): void {}}
+							src={v[1].src}
+						/>
+					);
+				})}
 				{Object.entries(ellipse).map((v) => {
 					return (
 						<Circ
@@ -143,26 +162,6 @@ function Artboard(props: StageProps) {
 								actions.transformText(v[0], arrt);
 							}}
 							onDelete={function (id?: string | undefined): void {}}
-						/>
-					);
-				})}
-				{Object.entries(image).map((v) => {
-					console.log(v);
-					return (
-						<CImage
-							shapeProps={v[1]}
-							isSelected={selected ? selected.id === v[0] : false}
-							onSelect={function (): void {
-								actions.setSelection({
-									id: v[0],
-									shape: "image",
-								});
-							}}
-							onChange={function (arrt: ImageConfig): void {
-								actions.transformImage(v[0], arrt);
-							}}
-							onDelete={function (id?: string | undefined): void {}}
-							src={v[1].src}
 						/>
 					);
 				})}

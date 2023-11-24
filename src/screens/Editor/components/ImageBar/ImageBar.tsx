@@ -43,6 +43,11 @@ function ImageBar() {
 							actions.setPrompt(v.target.value);
 						}}
 					></textarea>
+					{state.loading.fetchImage.status === "failed" && (
+						<p className="text-sm font-semibold text-red-500">
+							Failed to fetch image
+						</p>
+					)}
 					<GenerateButton
 						onClick={function (): void {
 							actions.fetchImage();

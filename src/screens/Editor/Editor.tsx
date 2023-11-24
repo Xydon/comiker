@@ -156,7 +156,7 @@ function Editor() {
 						>
 							<Artboard
 								width={widthHandle.width * 0.95}
-								height={800}
+								height={1000}
 								style={{ backgroundColor: "white" }}
 							/>
 						</div>

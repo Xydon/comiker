@@ -1,7 +1,7 @@
 import IconIndex from "@src/assets/assetIndex";
 import React, { useState } from "react";
 import UiElemButton from "./components/UiElemButton/UiElemButton";
-import { Backdrop, ButtonBase, Card } from "@mui/material";
+import { Backdrop, ButtonBase, Card, Tooltip } from "@mui/material";
 import { useApplicationContext } from "../../Editor";
 import styles from "./EditorNavBar.module.css";
 import PopUpContainer from "@src/components/PopUpContainer/PopUpContainer";
@@ -66,15 +66,17 @@ function EditorNavBar() {
 					</div>
 					<div className="flex gap-x-4">
 						<p className="text-sm font-medium" style={{ color: "#BFBFBF" }}></p>
-						<ButtonBase
-							style={{
-								background: "white",
-								padding: "12px 20px",
-								borderRadius: 8,
-							}}
-						>
-							<p className="text-sm font-medium">Add Page</p>
-						</ButtonBase>
+						<Tooltip title={"Coming soon"}>
+							<ButtonBase
+								style={{
+									background: "white",
+									padding: "12px 20px",
+									borderRadius: 8,
+								}}
+							>
+								<p className="text-sm font-medium">Add Page</p>
+							</ButtonBase>
+						</Tooltip>
 						<ButtonBase
 							style={{
 								background: "white",
