@@ -17,11 +17,14 @@ import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStat
 import TextEditActions from "./actions/TextEditActions";
 import TextToolbar from "./components/Toolbars/TextToolbar/TextToolbar";
 import EmptyToolbar from "./components/Toolbars/EmptyToolbar/EmptyToolbar";
+import RectEditActions from "./actions/RectEditActions";
+import RectToolbar from "./components/Toolbars/RectToolbar/RectToolbar";
 
 interface ApplicationContextTypes {
 	state: EditorTypes.State;
 	actions: EditorActions;
 	textToolbarActions: TextEditActions;
+	rectToolbarActions: RectEditActions;
 }
 const ApplicationContext = React.createContext<ApplicationContextTypes>(
 	{} as ApplicationContextTypes
@@ -49,9 +52,12 @@ function Editor() {
 
 	const actions = new EditorActions(state, setState);
 	const textToolbarActions = new TextEditActions(state, setState);
+	const rectToolbarActions = new RectEditActions(state, setState);
 
 	return (
-		<ApplicationContext.Provider value={{ state, actions, textToolbarActions }}>
+		<ApplicationContext.Provider
+			value={{ state, actions, textToolbarActions, rectToolbarActions }}
+		>
 			<div className="bg-black flex flex-col w-screen h-screen overflow-hidden">
 				<div className="border-b border-b-[#323232]" ref={navbarHeight.ref}>
 					<EditorNavBar />
@@ -117,9 +123,9 @@ function Editor() {
 							{state.selected && state.selected.shape === "text" && (
 								<TextToolbar />
 							)}
-							{/* {state.selected && state.selected.shape === "text" && (
-								<TextToolbar />
-							)} */}
+							{state.selected && state.selected.shape === "rectangle" && (
+								<RectToolbar />
+							)}
 						</div>
 						<div
 							className="p-8 overflow-auto"
