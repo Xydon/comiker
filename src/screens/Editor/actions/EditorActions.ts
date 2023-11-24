@@ -3,6 +3,12 @@ import { EditorTypes } from "../types";
 import generateId from "@src/utils/generateId";
 import { KonvaEventObject } from "konva/lib/Node";
 import getImageService from "../server/services/getImageService";
+import { RectConfig } from "konva/lib/shapes/Rect";
+import { EllipseConfig } from "konva/lib/shapes/Ellipse";
+import { TextConfig } from "konva/lib/shapes/Text";
+import { ImageConfig } from "konva/lib/shapes/Image";
+
+
 
 export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 	private fill = "#3a3a3a";
@@ -82,9 +88,26 @@ export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 		});
 	}
 
-	transformRect() {}
-	transformEllipse() {}
-	transformText() {}
+	transformRect(id: string, attr: RectConfig) {
+		this.mutateState((v) => {
+			v.rectangle[id] = attr;
+		});
+	}
+	transformEllipse(id: string, attr: EllipseConfig) {
+		this.mutateState((v) => {
+			v.ellipse[id] = attr;
+		});
+	}
+	transformText(id: string, attr: TextConfig) {
+		this.mutateState((v) => {
+			v.text[id] = attr;
+		});
+	}
+	transformImage(id: string, attr: ImageConfig) {
+		this.mutateState((v) => {
+			v.image[id] = { ...attr, src: v.image[id].src };
+		});
+	}
 
 	clubElements() {
 		const arr: { id: string; type: EditorTypes.Elements; color: string }[] = [];

@@ -8,17 +8,19 @@ import { EditorTypes } from "./types";
 import EditorActions from "./actions/EditorActions";
 import {
 	CircleComponentList,
-	ComponentList,
 	ImageComponentList,
 	RectComponentList,
 	TextComponentList,
 } from "./components/ComponentList/ComponentList";
 import ImageBar from "./components/ImageBar/ImageBar";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
+import TextEditActions from "./actions/TextEditActions";
+import TextToolbar from "./components/Toolbars/TextToolbar/TextToolbar";
 
 interface ApplicationContextTypes {
 	state: EditorTypes.State;
 	actions: EditorActions;
+	textToolbarActions: TextEditActions;
 }
 const ApplicationContext = React.createContext<ApplicationContextTypes>(
 	{} as ApplicationContextTypes
@@ -45,9 +47,10 @@ function Editor() {
 	});
 
 	const actions = new EditorActions(state, setState);
+	const textToolbarActions = new TextEditActions(state, setState);
 
 	return (
-		<ApplicationContext.Provider value={{ state, actions }}>
+		<ApplicationContext.Provider value={{ state, actions, textToolbarActions }}>
 			<div className="bg-black flex flex-col w-screen h-screen overflow-hidden">
 				<div className="border-b border-b-[#323232]" ref={navbarHeight.ref}>
 					<EditorNavBar />
@@ -107,8 +110,9 @@ function Editor() {
 						</div>
 					</div>
 					<div className="basis-3/5" ref={widthHandle.ref}>
-						<div ref={toolbarHeight.ref}>
+						<div className="flex" ref={toolbarHeight.ref}>
 							<SidebarHeader heading={"toolbar"} />
+							<TextToolbar />
 						</div>
 						<div
 							className="p-8 overflow-auto"

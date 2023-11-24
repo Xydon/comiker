@@ -10,6 +10,7 @@ import { EllipseConfig } from "konva/lib/shapes/Ellipse";
 import { TextConfig } from "konva/lib/shapes/Text";
 import CImage from "@src/screens/Dashboard/components/konva/ResizeableImage/ResizeableImage";
 import { ImageIndex } from "@src/assets/assetIndex";
+import { ImageConfig } from "konva/lib/shapes/Image";
 
 function Artboard(props: StageProps) {
 	const {
@@ -35,7 +36,9 @@ function Artboard(props: StageProps) {
 									shape: "ellipse",
 								});
 							}}
-							onChange={function (arrt: EllipseConfig): void {}}
+							onChange={function (arrt: EllipseConfig): void {
+								actions.transformEllipse(v[0], arrt);
+							}}
 						/>
 					);
 				})}
@@ -50,7 +53,9 @@ function Artboard(props: StageProps) {
 									shape: "rectangle",
 								});
 							}}
-							onChange={function (arrt: RectConfig): void {}}
+							onChange={function (arrt: RectConfig): void {
+								actions.transformRect(v[0], arrt);
+							}}
 							onDelete={function (id?: string | undefined): void {}}
 						/>
 					);
@@ -66,7 +71,9 @@ function Artboard(props: StageProps) {
 									shape: "text",
 								});
 							}}
-							onChange={function (arrt: TextConfig): void {}}
+							onChange={function (arrt: TextConfig): void {
+								actions.transformText(v[0], arrt);
+							}}
 							onDelete={function (id?: string | undefined): void {}}
 						/>
 					);
@@ -83,7 +90,9 @@ function Artboard(props: StageProps) {
 									shape: "image",
 								});
 							}}
-							onChange={function (arrt: TextConfig): void {}}
+							onChange={function (arrt: ImageConfig): void {
+								actions.transformImage(v[0], arrt);
+							}}
 							onDelete={function (id?: string | undefined): void {}}
 							src={v[1].src}
 						/>
