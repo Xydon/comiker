@@ -19,12 +19,15 @@ import TextToolbar from "./components/Toolbars/TextToolbar/TextToolbar";
 import EmptyToolbar from "./components/Toolbars/EmptyToolbar/EmptyToolbar";
 import RectEditActions from "./actions/RectEditActions";
 import RectToolbar from "./components/Toolbars/RectToolbar/RectToolbar";
+import CircleEditActions from "./actions/CircleEditActions";
+import CircleToolbar from "./components/Toolbars/CircleToolbar/CircleToolbar";
 
 interface ApplicationContextTypes {
 	state: EditorTypes.State;
 	actions: EditorActions;
 	textToolbarActions: TextEditActions;
 	rectToolbarActions: RectEditActions;
+	circleToolbarActions: CircleEditActions;
 }
 const ApplicationContext = React.createContext<ApplicationContextTypes>(
 	{} as ApplicationContextTypes
@@ -53,10 +56,17 @@ function Editor() {
 	const actions = new EditorActions(state, setState);
 	const textToolbarActions = new TextEditActions(state, setState);
 	const rectToolbarActions = new RectEditActions(state, setState);
+	const circleToolbarActions = new CircleEditActions(state, setState);
 
 	return (
 		<ApplicationContext.Provider
-			value={{ state, actions, textToolbarActions, rectToolbarActions }}
+			value={{
+				circleToolbarActions,
+				state,
+				actions,
+				textToolbarActions,
+				rectToolbarActions,
+			}}
 		>
 			<div className="bg-black flex flex-col w-screen h-screen overflow-hidden">
 				<div className="border-b border-b-[#323232]" ref={navbarHeight.ref}>
@@ -125,6 +135,9 @@ function Editor() {
 							)}
 							{state.selected && state.selected.shape === "rectangle" && (
 								<RectToolbar />
+							)}
+							{state.selected && state.selected.shape === "ellipse" && (
+								<CircleToolbar />
 							)}
 						</div>
 						<div
