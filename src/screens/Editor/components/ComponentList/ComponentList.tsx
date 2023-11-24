@@ -81,7 +81,7 @@ export function TextComponentList(
 					/>
 				</svg>
 			}
-			text={"Rectangle " + id}
+			text={"Text " + id}
 		/>
 	);
 }

@@ -21,6 +21,7 @@ import RectEditActions from "./actions/RectEditActions";
 import RectToolbar from "./components/Toolbars/RectToolbar/RectToolbar";
 import CircleEditActions from "./actions/CircleEditActions";
 import CircleToolbar from "./components/Toolbars/CircleToolbar/CircleToolbar";
+import { useLocation } from "react-router-dom";
 
 interface ApplicationContextTypes {
 	state: EditorTypes.State;
@@ -39,6 +40,7 @@ function Editor() {
 	const widthHandle = useWidth();
 	const navbarHeight = useHeight();
 	const toolbarHeight = useHeight();
+	const { state: st } = useLocation();
 
 	const [state, setState] = useState<EditorTypes.State>({
 		rectangle: {},
@@ -46,7 +48,7 @@ function Editor() {
 		text: {},
 		selected: null,
 		image: {},
-		prompt: "",
+		prompt: st.prompt as string,
 		imgSrc: {},
 		loading: {
 			fetchImage: AsyncStateFactory(),

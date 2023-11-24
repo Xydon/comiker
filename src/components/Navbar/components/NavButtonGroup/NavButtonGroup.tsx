@@ -5,7 +5,7 @@ import { DefaultComponentProps } from "@mui/material/OverridableComponent";
 import { navlinks } from "@src/constants/constants";
 
 function NavButton(
-	props: React.HTMLAttributes<HTMLAnchorElement> & {
+	props: React.HTMLAttributes<HTMLButtonElement> & {
 		children?: string;
 		isActive: boolean;
 		link: string;
@@ -13,14 +13,18 @@ function NavButton(
 ) {
 	const { children, isActive, link, ...rest } = props;
 	return (
-		<a
+		<button
 			{...rest}
-			href={link}
-			style={{ padding: "12px 20px", cursor: "pointer", border: '1px solid transparent' }}
+			// href={link}
+			style={{
+				padding: "12px 20px",
+				cursor: "pointer",
+				border: "1px solid transparent",
+			}}
 			className={isActive ? styles.buttonContainer : ""}
 		>
 			<p className={styles.buttonText}>{children}</p>
-		</a>
+		</button>
 	);
 }
 
@@ -38,7 +42,7 @@ function NavButtonGroup(props: { currentLink: string }) {
 					onClick={() => {
 						setCurrent(v[1]);
 					}}
-					link={v[1]}
+					link={""}
 				>
 					{v[0]}
 				</NavButton>

@@ -38,6 +38,7 @@ function ImageBar() {
 						name="text-area"
 						id="text-area"
 						className={"rounded mb-2 " + styles.textArea}
+						value={state.prompt}
 						onChange={(v) => {
 							actions.setPrompt(v.target.value);
 						}}
