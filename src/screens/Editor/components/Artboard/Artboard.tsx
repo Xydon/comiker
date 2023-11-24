@@ -1,5 +1,5 @@
-import React from "react";
-import { Layer, Stage, StageProps } from "react-konva";
+import React, { useEffect, useRef } from "react";
+import { Group, Layer, Stage, StageProps } from "react-konva";
 import { useApplicationContext } from "../../Editor";
 import Circ from "@src/screens/Dashboard/components/konva/ResizeableCircle/ResizeableCircle";
 import { KonvaEventObject } from "konva/lib/Node";
@@ -11,6 +11,8 @@ import { TextConfig } from "konva/lib/shapes/Text";
 import CImage from "@src/screens/Dashboard/components/konva/ResizeableImage/ResizeableImage";
 import { ImageIndex } from "@src/assets/assetIndex";
 import { ImageConfig } from "konva/lib/shapes/Image";
+import { PDFDocument } from "pdf-lib";
+
 
 function Artboard(props: StageProps) {
 	const {
@@ -18,8 +20,74 @@ function Artboard(props: StageProps) {
 		actions,
 	} = useApplicationContext();
 
+	const stageRef = useRef<any>(null);
+
+	const downloadAsFile = (dataURL: string, fileName: string) => {
+		const anchor = document.createElement("a");
+		anchor.href = dataURL;
+		anchor.download = fileName;
+		document.body.appendChild(anchor);
+		anchor.click();
+		document.body.removeChild(anchor);
+	};
+
+	const exportToPng = () => {
+    if (stageRef.current) {
+      const dataURL = stageRef.current.toDataURL({ mimeType: 'image/png' });
+      downloadAsFile(dataURL, 'exported-image.png');
+    }
+  };
+
+	const downloadAsFile2 = async (pdfBytes: Uint8Array, fileName: string) => {
+		const blob = new Blob([pdfBytes], { type: "application/pdf" });
+		const link = document.createElement("a");
+		link.href = window.URL.createObjectURL(blob);
+		link.download = fileName;
+		link.click();
+	};
+
+	const exportToPdf = async () => {
+		if (stageRef.current) {
+			const { width, height } = stageRef.current.attrs;
+			const dataURL = stageRef.current.toDataURL({ mimeType: "image/png" });
+
+			const pdfDoc = await PDFDocument.create();
+			const page = pdfDoc.addPage([width, height]);
+
+			// Convert dataURL to Uint8Array
+			const blob = await fetch(dataURL).then((res) => res.blob());
+			const buffer = await new Response(blob).arrayBuffer();
+			const imageBytes = new Uint8Array(buffer);
+
+			const image = await pdfDoc.embedPng(imageBytes);
+
+			const { width: imgWidth, height: imgHeight } = image.scale(1);
+
+			page.drawImage(image, {
+				x: 0,
+				y: height - imgHeight, // adjust this if needed
+				width: imgWidth,
+				height: imgHeight,
+			});
+
+			const pdfBytes = await pdfDoc.save();
+			downloadAsFile2(pdfBytes, "exported-document.pdf");
+		}
+	};
+	useEffect(() => {
+		actions.setFunctions({
+			downloadAsPdf: () => {
+				exportToPdf();
+			},
+			downloadAsPng: () => {
+				exportToPng();
+			},
+		});
+	}, [stageRef.current]);
+
 	return (
 		<Stage
+			ref={stageRef}
 			{...props}
 			onMouseDown={(e) => actions.setSelectionBlur(e)}
 			onTouchStart={(e) => actions.setSelectionBlur(e)}

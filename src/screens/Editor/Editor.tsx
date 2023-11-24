@@ -51,6 +51,10 @@ function Editor() {
 		loading: {
 			fetchImage: AsyncStateFactory(),
 		},
+		functions: {
+			downloadAsPdf: () => {},
+			downloadAsPng: () => {},
+		},
 	});
 
 	const actions = new EditorActions(state, setState);

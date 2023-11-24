@@ -8,8 +8,6 @@ import { EllipseConfig } from "konva/lib/shapes/Ellipse";
 import { TextConfig } from "konva/lib/shapes/Text";
 import { ImageConfig } from "konva/lib/shapes/Image";
 
-
-
 export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 	private fill = "#3a3a3a";
 
@@ -171,5 +169,11 @@ export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 				v.imgSrc[id] = res;
 			});
 		}
+	}
+
+	setFunctions(setup: typeof this.state.functions) {
+		this.mutateState((v) => {
+			v.functions = setup;
+		});
 	}
 }

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import styles from "./ExportForm.module.css";
 import { ButtonBase } from "@mui/material";
+import { useApplicationContext } from "@src/screens/Editor/Editor";
+import CloseIcon from "@mui/icons-material/Close";
 
-function ExportForm() {
+function ExportForm({ close }: { close: () => void }) {
 	const [selected, setSelected] = useState<"png" | "pdf">("png");
+
+	const api = useApplicationContext();
 
 	return (
 		<div
@@ -20,9 +24,23 @@ function ExportForm() {
 			}}
 			className="bg-darkGray"
 		>
-			<p className="text-xl font-semibold text-white px-8 py-5 border-b border-b-[#323232]">
-				Export File
-			</p>
+			<div className="flex justify-between px-8 py-5 border-b border-b-[#323232] items-center">
+				<p className="text-xl font-semibold text-white ">Export File</p>
+
+				<ButtonBase
+					sx={{ padding: 2, borderRadius: 39 }}
+					TouchRippleProps={{
+						style: {
+							background: "rgba(256,256,256, 0.2)",
+						},
+					}}
+					onClick={() => {
+						close();
+					}}
+				>
+					<CloseIcon sx={{ color: "white" }} />
+				</ButtonBase>
+			</div>
 			<div className="flex gap-x-4 justify-between p-8">
 				<div
 					className={
@@ -59,13 +77,20 @@ function ExportForm() {
 						className="text-md "
 						style={{ color: selected !== "png" ? "black" : "white" }}
 					>
-						Export as png
+						Export as pdf
 					</p>
 				</div>
 			</div>
 			<div className="px-8">
 				<ButtonBase
 					style={{ background: "white", padding: "10px", width: "100%" }}
+					onClick={() => {
+						if (selected === "pdf") {
+							api.state.functions.downloadAsPdf();
+						} else {
+							api.state.functions.downloadAsPng();
+						}
+					}}
 				>
 					<p>Generate</p>
 				</ButtonBase>

@@ -90,7 +90,13 @@ function EditorNavBar() {
 					</div>
 				</div>
 			</div>
-			{showBackdrop && <ExportForm />}
+			{showBackdrop && (
+				<ExportForm
+					close={function (): void {
+						setShowBackdrop(false);
+					}}
+				/>
+			)}
 		</>
 	);
 }

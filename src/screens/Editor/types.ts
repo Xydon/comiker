@@ -5,8 +5,13 @@ import { TextConfig } from "konva/lib/shapes/Text";
 
 export namespace EditorTypes {
 	export type Elements = "rectangle" | "ellipse" | "text" | "image";
-	export type CImageConfig = ImageConfig & { src: string|Blob };
-	export type FontStyle = "normal" | "italic" | "bold" | "bold italic" | "italic bold";
+	export type CImageConfig = ImageConfig & { src: string | Blob };
+	export type FontStyle =
+		| "normal"
+		| "italic"
+		| "bold"
+		| "bold italic"
+		| "italic bold";
 	export interface State {
 		rectangle: Record<string, RectConfig>;
 		ellipse: Record<string, EllipseConfig>;
@@ -18,6 +23,10 @@ export namespace EditorTypes {
 			shape: Elements;
 		} | null;
 		prompt: string;
+		functions: {
+			downloadAsPng: () => void;
+			downloadAsPdf: () => void;
+		};
 		loading: Record<string, AsyncState>;
 	}
 }
