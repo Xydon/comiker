@@ -16,6 +16,7 @@ import ImageBar from "./components/ImageBar/ImageBar";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
 import TextEditActions from "./actions/TextEditActions";
 import TextToolbar from "./components/Toolbars/TextToolbar/TextToolbar";
+import EmptyToolbar from "./components/Toolbars/EmptyToolbar/EmptyToolbar";
 
 interface ApplicationContextTypes {
 	state: EditorTypes.State;
@@ -112,7 +113,13 @@ function Editor() {
 					<div className="basis-3/5" ref={widthHandle.ref}>
 						<div className="flex" ref={toolbarHeight.ref}>
 							<SidebarHeader heading={"toolbar"} />
-							<TextToolbar />
+							{!state.selected && <EmptyToolbar />}
+							{state.selected && state.selected.shape === "text" && (
+								<TextToolbar />
+							)}
+							{/* {state.selected && state.selected.shape === "text" && (
+								<TextToolbar />
+							)} */}
 						</div>
 						<div
 							className="p-8 overflow-auto"

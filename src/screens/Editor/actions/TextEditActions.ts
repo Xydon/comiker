@@ -50,6 +50,7 @@ export default class TextEditActions extends StateUtils<EditorTypes.State> {
 		return v.fontStyle as EditorTypes.FontStyle;
 	}
 
+
 	setSelectedFontFamily(fontFamily: string) {
 		const v = this.initCheckId();
 		if (v === false) return;
