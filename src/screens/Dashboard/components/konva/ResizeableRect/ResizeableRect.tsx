@@ -1,3 +1,4 @@
+import { KonvaEventObject } from "konva/lib/Node";
 import { RectConfig } from "konva/lib/shapes/Rect";
 import React from "react";
 import { Rect, Transformer } from "react-konva";
@@ -5,7 +6,7 @@ import { Rect, Transformer } from "react-konva";
 const Rectangle: React.FC<{
 	shapeProps: RectConfig;
 	isSelected: boolean;
-	onSelect: (attr: RectConfig) => void;
+	onSelect: (attr: KonvaEventObject<MouseEvent>) => void;
 	onChange: (arrt: RectConfig) => void;
   onDelete: (id?: string) => void;
 }> = ({ shapeProps, isSelected, onSelect, onChange, onDelete }) => {

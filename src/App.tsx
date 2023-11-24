@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Loading from "./screens/Loading/Loading";
 import Home from "@src/screens/Home/Home";
-import Dashboard from "./screens/Dashboard/Dashboard";
+// import Dashboard from "./screens/Dashboard/Dashboard";
 import Editor from "./screens/Editor/Editor";
 
 

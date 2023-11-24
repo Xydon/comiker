@@ -5,7 +5,7 @@ import { Rect, Text, Transformer } from "react-konva";
 const SelectableText: React.FC<{
 	shapeProps: TextConfig;
 	isSelected: boolean;
-	onSelect: (attr: TextConfig) => void;
+	onSelect: () => void;
 	onChange: (arrt: TextConfig) => void;
 	onDelete: (id?: string) => void;
 }> = ({ shapeProps, isSelected, onSelect, onChange, onDelete }) => {

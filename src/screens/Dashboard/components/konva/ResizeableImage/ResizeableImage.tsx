@@ -2,7 +2,7 @@ import { RectConfig } from "konva/lib/shapes/Rect";
 import React from "react";
 import { Rect, Transformer } from "react-konva";
 
-const Rectangle: React.FC<{
+const CImage: React.FC<{
 	shapeProps: RectConfig;
 	isSelected: boolean;
 	onSelect: (attr: RectConfig) => void;
@@ -83,4 +83,4 @@ const Rectangle: React.FC<{
 	);
 };
 
-export default Rectangle;
+export default CImage;

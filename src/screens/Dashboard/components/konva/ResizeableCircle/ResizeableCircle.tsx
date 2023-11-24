@@ -1,14 +1,14 @@
 import { KonvaEventObject } from "konva/lib/Node";
-import { RectConfig } from "konva/lib/shapes/Rect";
+import { EllipseConfig } from "konva/lib/shapes/Ellipse";
 import React, { useRef, useState } from "react";
-import { Circle, KonvaNodeEvents, Rect, Transformer } from "react-konva";
+import { Circle, Ellipse, KonvaNodeEvents, Rect, Transformer } from "react-konva";
 
 
 const Circ: React.FC<{
-	shapeProps: RectConfig;
+	shapeProps: EllipseConfig;
 	isSelected: boolean;
 	onSelect: (e: KonvaEventObject<MouseEvent>) => void;
-	onChange: (arrt: RectConfig) => void;
+	onChange: (arrt: EllipseConfig) => void;
 }> = ({ shapeProps, isSelected, onSelect, onChange }) => {
 	const shapeRef = React.useRef<any>();
 	const trRef = React.useRef<any>();
@@ -23,7 +23,7 @@ const Circ: React.FC<{
 
 	return (
 		<React.Fragment>
-			<Circle
+			<Ellipse
 				onClick={onSelect}
 				onTap={onSelect}
 				ref={shapeRef}
