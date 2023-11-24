@@ -10,6 +10,11 @@ h2,
 h3,
 h4,
 h5,
-h6, input {
+h6,
+input {
 	font-family: "Manrope", sans-serif;
+}
+
+body {
+	cursor: url("./assets/icons/Cursor.svg"), auto;
 }

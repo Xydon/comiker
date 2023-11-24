@@ -61,4 +61,48 @@ export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 			this.setSelection(null);
 		}
 	}
+
+	transformRect() {}
+	transformEllipse() {}
+	transformText() {}
+
+	clubElements() {
+		const arr: { id: string; type: EditorTypes.Elements; color: string }[] = [];
+
+		let carr = Object.values(this.state.ellipse);
+
+		carr.forEach((v) => {
+			arr.push({
+				id: v.id || "id",
+				color: v.fill || "#fff",
+				type: "ellipse",
+			});
+		});
+
+		let darr = Object.values(this.state.rectangle);
+		darr.forEach((v) => {
+			arr.push({
+				id: v.id || "id",
+				type: "rectangle",
+				color: v.fill || "#fff",
+			});
+		});
+
+		let earr = Object.values(this.state.text);
+		earr.forEach((v) => {
+			arr.push({
+				id: v.id || "id",
+				type: "text",
+				color: v.fill || "#fff",
+			});
+		});
+
+		function shuffle(array: any[]) {
+			array.sort(() => Math.random() - 0.5);
+		}
+
+		// shuffle(arr);
+
+		return arr;
+	}
 }

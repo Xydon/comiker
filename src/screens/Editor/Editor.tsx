@@ -6,6 +6,12 @@ import useWidth from "@src/modules/hooks/useWidth";
 import useHeight from "@src/modules/hooks/useHeight";
 import { EditorTypes } from "./types";
 import EditorActions from "./actions/EditorActions";
+import {
+	CircleComponentList,
+	ComponentList,
+	RectComponentList,
+	TextComponentList,
+} from "./components/ComponentList/ComponentList";
 
 interface ApplicationContextTypes {
 	state: EditorTypes.State;
@@ -40,7 +46,48 @@ function Editor() {
 				</div>
 				<div className="w-full flex grow">
 					<div className="basis-1/5 border-r border-r-[#323232]">
-						<SidebarHeader heading={"Element"} />
+						<div className="mb-4">
+							<SidebarHeader heading={"Element"} />
+						</div>
+						<div>
+							{actions.clubElements().map((v) => {
+								console.log(v);
+								if (v.type === "ellipse")
+									return (
+										<CircleComponentList
+											onClick={() => {
+												actions.setSelection({ id: v.id, shape: "ellipse" });
+											}}
+											key={v.id}
+											id={v.id}
+											color={v.color}
+										/>
+									);
+								else if (v.type === "rectangle") {
+									return (
+										<RectComponentList
+											onClick={() => {
+												actions.setSelection({ id: v.id, shape: "rectangle" });
+											}}
+											key={v.id}
+											id={v.id}
+											color={v.color}
+										/>
+									);
+								} else if (v.type === "text") {
+									return (
+										<TextComponentList
+											onClick={() => {
+												actions.setSelection({ id: v.id, shape: "text" });
+											}}
+											key={v.id}
+											id={v.id}
+											color={v.color}
+										/>
+									);
+								}
+							})}
+						</div>
 					</div>
 					<div className="basis-3/5" ref={widthHandle.ref}>
 						<div ref={toolbarHeight.ref}>

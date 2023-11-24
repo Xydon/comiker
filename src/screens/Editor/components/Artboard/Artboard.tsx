@@ -6,6 +6,8 @@ import { KonvaEventObject } from "konva/lib/Node";
 import { RectConfig } from "konva/lib/shapes/Rect";
 import Rectangle from "@src/screens/Dashboard/components/konva/ResizeableRect/ResizeableRect";
 import SelectableText from "@src/screens/Dashboard/components/konva/SelectableText/SelectableText";
+import { EllipseConfig } from "konva/lib/shapes/Ellipse";
+import { TextConfig } from "konva/lib/shapes/Text";
 
 function Artboard(props: StageProps) {
 	const {
@@ -31,7 +33,7 @@ function Artboard(props: StageProps) {
 									shape: "ellipse",
 								});
 							}}
-							onChange={function (arrt: RectConfig): void {}}
+							onChange={function (arrt: EllipseConfig): void {}}
 						/>
 					);
 				})}
@@ -62,7 +64,7 @@ function Artboard(props: StageProps) {
 									shape: "text",
 								});
 							}}
-							onChange={function (arrt: RectConfig): void {}}
+							onChange={function (arrt: TextConfig): void {}}
 							onDelete={function (id?: string | undefined): void {}}
 						/>
 					);
