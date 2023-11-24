@@ -48,7 +48,7 @@ function Editor() {
 		text: {},
 		selected: null,
 		image: {},
-		prompt: st.prompt as string,
+		prompt: st ? st.prompt : "",
 		imgSrc: {},
 		loading: {
 			fetchImage: AsyncStateFactory(),
