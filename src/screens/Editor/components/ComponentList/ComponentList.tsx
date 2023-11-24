@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ComponentList.module.css";
+import IconIndex from "@src/assets/assetIndex";
 
 interface Props {
 	display: React.ReactNode;
@@ -81,6 +82,19 @@ export function TextComponentList(
 				</svg>
 			}
 			text={"Rectangle " + id}
+		/>
+	);
+}
+
+export function ImageComponentList(
+	props: { id: string; color: string } & React.HTMLAttributes<HTMLDivElement>
+) {
+	const { id, color, ...rest } = props;
+	return (
+		<ComponentList
+			{...rest}
+			display={<IconIndex.ImageIcon />}
+			text={"Image " + id}
 		/>
 	);
 }

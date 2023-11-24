@@ -14,14 +14,14 @@ const CImage: React.FC<{
 	const shapeRef = useRef<any>();
 	const trRef = useRef<any>();
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (isSelected) {
 			trRef.current.nodes([shapeRef.current]);
 			trRef.current.getLayer().batchDraw();
 		}
 	}, [isSelected]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (isSelected) {
 			const deleteHandler = (e: KeyboardEvent) => {
 				if (e.key === "Delete") {
@@ -37,7 +37,15 @@ const CImage: React.FC<{
 		}
 	}, [isSelected]);
 
-	const [img] = useImage(typeof src === 'string' ? src : URL.createObjectURL(src));
+	const [imageSrc, setImageSrc] = useState<string>(
+		typeof src === "string" ? src : URL.createObjectURL(src)
+	);
+	useEffect(() => {
+		setImageSrc(typeof src === "string" ? src : URL.createObjectURL(src));
+	}, [src]);
+
+	const [img] = useImage(imageSrc);
+	console.log(URL.createObjectURL(src as Blob));
 	const [layout, setLayout] = useState<any>({
 		width: 0,
 		height: 0,
@@ -46,7 +54,7 @@ const CImage: React.FC<{
 
 	useEffect(() => {
 		const imageObj = new window.Image();
-		imageObj.src = typeof src === 'string' ? src : URL.createObjectURL(src);
+		imageObj.src = typeof src === "string" ? src : URL.createObjectURL(src);
 
 		imageObj.onload = () => {
 			const aspectRatio = imageObj.width / imageObj.height;
@@ -58,7 +66,7 @@ const CImage: React.FC<{
 
 		// Revoke the object URL when the component unmounts
 		return () => {
-			if (typeof src !== 'string') {
+			if (typeof src !== "string") {
 				URL.revokeObjectURL(imageObj.src);
 			}
 		};

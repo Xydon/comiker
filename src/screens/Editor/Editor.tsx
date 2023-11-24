@@ -9,6 +9,7 @@ import EditorActions from "./actions/EditorActions";
 import {
 	CircleComponentList,
 	ComponentList,
+	ImageComponentList,
 	RectComponentList,
 	TextComponentList,
 } from "./components/ComponentList/ComponentList";
@@ -36,10 +37,10 @@ function Editor() {
 		text: {},
 		selected: null,
 		image: {},
-		prompt: '',
+		prompt: "",
 		imgSrc: {},
 		loading: {
-			fetchImage: AsyncStateFactory()
+			fetchImage: AsyncStateFactory(),
 		},
 	});
 
@@ -87,6 +88,16 @@ function Editor() {
 												actions.setSelection({ id: v.id, shape: "text" });
 											}}
 											key={v.id}
+											id={v.id}
+											color={v.color}
+										/>
+									);
+								} else if (v.type === "image") {
+									return (
+										<ImageComponentList
+											onClick={() => {
+												actions.setSelection({ id: v.id, shape: "image" });
+											}}
 											id={v.id}
 											color={v.color}
 										/>

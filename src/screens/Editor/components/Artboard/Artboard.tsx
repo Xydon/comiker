@@ -13,7 +13,7 @@ import { ImageIndex } from "@src/assets/assetIndex";
 
 function Artboard(props: StageProps) {
 	const {
-		state: { ellipse, rectangle, text, selected },
+		state: { ellipse, rectangle, text, selected, image },
 		actions,
 	} = useApplicationContext();
 
@@ -71,19 +71,24 @@ function Artboard(props: StageProps) {
 						/>
 					);
 				})}
-				<CImage
-					shapeProps={{
-						image: undefined,
-						x: 100,
-						y: 100,
-						width: 100,
-					}}
-					isSelected={false}
-					onSelect={function (): void {}}
-					onChange={function (arrt: RectConfig): void {}}
-					onDelete={function (id?: string | undefined): void {}}
-					src={ImageIndex.SpeechBubble}
-				/>
+				{Object.entries(image).map((v) => {
+					console.log(v);
+					return (
+						<CImage
+							shapeProps={v[1]}
+							isSelected={selected ? selected.id === v[0] : false}
+							onSelect={function (): void {
+								actions.setSelection({
+									id: v[0],
+									shape: "image",
+								});
+							}}
+							onChange={function (arrt: TextConfig): void {}}
+							onDelete={function (id?: string | undefined): void {}}
+							src={v[1].src}
+						/>
+					);
+				})}
 			</Layer>
 		</Stage>
 	);

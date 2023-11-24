@@ -46,6 +46,19 @@ export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 		});
 	}
 	createLine() {}
+	createImage(id: string) {
+		this.mutateState((v) => {
+			if (v.imgSrc[id] === undefined) return;
+			const newId = generateId();
+			v.image[newId] = {
+				id: newId,
+				src: v.imgSrc[id],
+				image: undefined,
+				x: 50,
+				y: 50,
+			};
+		});
+	}
 
 	setSelection(selection: typeof this.state.selected) {
 		this.mutateState((v) => {
@@ -100,6 +113,15 @@ export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 			arr.push({
 				id: v.id || "id",
 				type: "text",
+				color: v.fill || "#fff",
+			});
+		});
+
+		let farr = Object.values(this.state.image);
+		farr.forEach((v) => {
+			arr.push({
+				id: v.id || "id",
+				type: "image",
 				color: v.fill || "#fff",
 			});
 		});

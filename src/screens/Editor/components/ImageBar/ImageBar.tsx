@@ -19,6 +19,9 @@ function ImageBar() {
 				{Object.entries(state.imgSrc).map((v) => {
 					return (
 						<BlobImageRenderer
+							onClick={() => {
+								actions.createImage(v[0]);
+							}}
 							key={v[0]}
 							blobData={v[1]}
 							style={{ height: 80 }}

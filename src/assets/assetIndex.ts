@@ -8,6 +8,7 @@ import { ReactComponent as ComikerCircle } from "./icons/ComikerCircle.svg";
 import { ReactComponent as UICircle } from "./icons/UICircle.svg";
 import { ReactComponent as UIText } from "./icons/UIText.svg";
 import { ReactComponent as UISquare } from "./icons/UISquare.svg";
+import { ReactComponent as ImageIcon } from "./icons/ImageIcon.svg";
 const SpeechBubble = require("./images/SpeechBubble.png");
 
 const IconIndex = {
@@ -21,6 +22,7 @@ const IconIndex = {
 	UISquare,
 	UICircle,
 	UIText,
+	ImageIcon
 };
 
 export const ImageIndex = {

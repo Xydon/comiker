@@ -13,6 +13,7 @@
     "@types/node": "^16.18.64",
     "@types/react": "^18.2.38",
     "@types/react-dom": "^18.2.17",
+    "@types/uuid": "^9.0.7",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.5",
     "konva": "^9.2.3",
@@ -23,6 +24,7 @@
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
     "use-image": "^1.1.1",
+    "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
