@@ -8,6 +8,8 @@ import Rectangle from "@src/screens/Dashboard/components/konva/ResizeableRect/Re
 import SelectableText from "@src/screens/Dashboard/components/konva/SelectableText/SelectableText";
 import { EllipseConfig } from "konva/lib/shapes/Ellipse";
 import { TextConfig } from "konva/lib/shapes/Text";
+import CImage from "@src/screens/Dashboard/components/konva/ResizeableImage/ResizeableImage";
+import { ImageIndex } from "@src/assets/assetIndex";
 
 function Artboard(props: StageProps) {
 	const {
@@ -69,6 +71,19 @@ function Artboard(props: StageProps) {
 						/>
 					);
 				})}
+				<CImage
+					shapeProps={{
+						image: undefined,
+						x: 100,
+						y: 100,
+						width: 100,
+					}}
+					isSelected={false}
+					onSelect={function (): void {}}
+					onChange={function (arrt: RectConfig): void {}}
+					onDelete={function (id?: string | undefined): void {}}
+					src={ImageIndex.SpeechBubble}
+				/>
 			</Layer>
 		</Stage>
 	);

@@ -23,7 +23,7 @@ const IconIndex = {
 	UIText,
 };
 
-const ImageIndex = {
+export const ImageIndex = {
 	SpeechBubble,
 };
 

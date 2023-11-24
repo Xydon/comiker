@@ -1,14 +1,16 @@
-import { RectConfig } from "konva/lib/shapes/Rect";
-import React from "react";
-import { Rect, Transformer } from "react-konva";
+import { ImageConfig } from "konva/lib/shapes/Image";
+import React, { useEffect, useRef, useState } from "react";
+import { Rect, Transformer, Image } from "react-konva";
+import useImage from "use-image";
 
 const CImage: React.FC<{
-	shapeProps: RectConfig;
+	shapeProps: ImageConfig;
 	isSelected: boolean;
-	onSelect: (attr: RectConfig) => void;
-	onChange: (arrt: RectConfig) => void;
-  onDelete: (id?: string) => void;
-}> = ({ shapeProps, isSelected, onSelect, onChange, onDelete }) => {
+	onSelect: () => void;
+	onChange: (arrt: ImageConfig) => void;
+	onDelete: (id?: string) => void;
+	src: string;
+}> = ({ shapeProps, isSelected, onSelect, onChange, onDelete, src }) => {
 	const shapeRef = React.useRef<any>();
 	const trRef = React.useRef<any>();
 
@@ -23,7 +25,7 @@ const CImage: React.FC<{
 		if (isSelected) {
 			const deleteHandler = (e: KeyboardEvent) => {
 				if (e.key === "Delete") {
-          onDelete(shapeProps.id); 
+					onDelete(shapeProps.id);
 				}
 			};
 
@@ -35,13 +37,40 @@ const CImage: React.FC<{
 		}
 	}, [isSelected]);
 
+	const [img] = useImage(src);
+	const [layout, setLayout] = useState<any>({
+		width: 0,
+		height: 0,
+	});
+	const maxWidth = shapeProps.width ? shapeProps.width : 100;
+
+	useEffect(() => {
+		const imageObj = new window.Image();
+		imageObj.src = src;
+
+		imageObj.onload = () => {
+			const aspectRatio = imageObj.width / imageObj.height;
+			const newWidth = Math.min(maxWidth, imageObj.width);
+			const newHeight = newWidth / aspectRatio;
+
+			setLayout({ width: newWidth, height: newHeight });
+		};
+	}, [src, maxWidth]);
+
+	const config = {
+		...shapeProps,
+		image: img,
+		height: layout.height,
+		width: layout.width,
+	};
+
 	return (
 		<React.Fragment>
-			<Rect
+			<Image
 				onClick={onSelect}
 				onTap={onSelect}
 				ref={shapeRef}
-				{...shapeProps}
+				{...config}
 				draggable
 				onDragEnd={(e) => {
 					onChange({

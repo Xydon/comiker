@@ -51,7 +51,6 @@ function Editor() {
 						</div>
 						<div>
 							{actions.clubElements().map((v) => {
-								console.log(v);
 								if (v.type === "ellipse")
 									return (
 										<CircleComponentList
@@ -102,7 +101,7 @@ function Editor() {
 							}}
 						>
 							<Artboard
-								width={widthHandle.width * 0.7}
+								width={widthHandle.width*0.95}
 								height={800}
 								style={{ backgroundColor: "white" }}
 							/>
