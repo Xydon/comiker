@@ -11,10 +11,12 @@ export namespace EditorTypes {
 		ellipse: Record<string, EllipseConfig>;
 		text: Record<string, TextConfig>;
 		image: Record<string, CImageConfig>;
+		imgSrc: Record<string, Blob>;
 		selected: {
 			id: string;
 			shape: Elements;
 		} | null;
+		prompt: string;
 		loading: Record<string, AsyncState>;
 	}
 }

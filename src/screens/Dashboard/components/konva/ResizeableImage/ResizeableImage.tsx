@@ -1,6 +1,6 @@
 import { ImageConfig } from "konva/lib/shapes/Image";
 import React, { useEffect, useRef, useState } from "react";
-import { Rect, Transformer, Image } from "react-konva";
+import { Transformer, Image } from "react-konva";
 import useImage from "use-image";
 
 const CImage: React.FC<{
@@ -9,10 +9,10 @@ const CImage: React.FC<{
 	onSelect: () => void;
 	onChange: (arrt: ImageConfig) => void;
 	onDelete: (id?: string) => void;
-	src: string;
+	src: string | Blob; // Accept either a string URL or Blob
 }> = ({ shapeProps, isSelected, onSelect, onChange, onDelete, src }) => {
-	const shapeRef = React.useRef<any>();
-	const trRef = React.useRef<any>();
+	const shapeRef = useRef<any>();
+	const trRef = useRef<any>();
 
 	React.useEffect(() => {
 		if (isSelected) {
@@ -37,16 +37,16 @@ const CImage: React.FC<{
 		}
 	}, [isSelected]);
 
-	const [img] = useImage(src);
+	const [img] = useImage(typeof src === 'string' ? src : URL.createObjectURL(src));
 	const [layout, setLayout] = useState<any>({
 		width: 0,
 		height: 0,
 	});
-	const maxWidth = shapeProps.width ? shapeProps.width : 100;
+	const maxWidth = shapeProps.width || 100;
 
 	useEffect(() => {
 		const imageObj = new window.Image();
-		imageObj.src = src;
+		imageObj.src = typeof src === 'string' ? src : URL.createObjectURL(src);
 
 		imageObj.onload = () => {
 			const aspectRatio = imageObj.width / imageObj.height;
@@ -54,6 +54,13 @@ const CImage: React.FC<{
 			const newHeight = newWidth / aspectRatio;
 
 			setLayout({ width: newWidth, height: newHeight });
+		};
+
+		// Revoke the object URL when the component unmounts
+		return () => {
+			if (typeof src !== 'string') {
+				URL.revokeObjectURL(imageObj.src);
+			}
 		};
 	}, [src, maxWidth]);
 

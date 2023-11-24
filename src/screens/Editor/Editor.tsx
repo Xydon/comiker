@@ -13,6 +13,7 @@ import {
 	TextComponentList,
 } from "./components/ComponentList/ComponentList";
 import ImageBar from "./components/ImageBar/ImageBar";
+import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
 
 interface ApplicationContextTypes {
 	state: EditorTypes.State;
@@ -35,7 +36,11 @@ function Editor() {
 		text: {},
 		selected: null,
 		image: {},
-		loading: {},
+		prompt: '',
+		imgSrc: {},
+		loading: {
+			fetchImage: AsyncStateFactory()
+		},
 	});
 
 	const actions = new EditorActions(state, setState);
@@ -110,7 +115,6 @@ function Editor() {
 						</div>
 					</div>
 					<div className="basis-1/5 border-l border-l-[#323232]">
-						<SidebarHeader heading={"Images"} />
 						<ImageBar />
 					</div>
 				</div>

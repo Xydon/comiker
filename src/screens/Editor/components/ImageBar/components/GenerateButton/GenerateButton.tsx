@@ -13,8 +13,7 @@ function GenerateButton({ onClick, isLoading }: ButtonProps) {
 				onClick();
 			}}
 		>
-			<button
-				type="button"
+			<div
 				className={`flex relative ${isLoading ? "gap-x-2" : ""} items-center ${
 					isLoading ? "bg-neutral-900" : "bg-themePurple"
 				} rounded shadow-sm text-white font-semibold px-3 py-2 text-sm cursor-pointer`}
@@ -45,7 +44,7 @@ function GenerateButton({ onClick, isLoading }: ButtonProps) {
 					</path>
 				</svg>
 				{isLoading ? <>Processing...</> : <>Generate</>}
-			</button>
+			</div>
 		</ButtonBase>
 	);
 }

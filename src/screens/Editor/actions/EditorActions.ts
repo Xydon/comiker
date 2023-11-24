@@ -2,6 +2,7 @@ import { ServerStateUtils } from "@src/modules/StateManagement/Core/StateUtils";
 import { EditorTypes } from "../types";
 import generateId from "@src/utils/generateId";
 import { KonvaEventObject } from "konva/lib/Node";
+import getImageService from "../server/services/getImageService";
 
 export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 	private fill = "#3a3a3a";
@@ -62,6 +63,12 @@ export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 		}
 	}
 
+	setPrompt(prompt: string) {
+		this.mutateState((v) => {
+			v.prompt = prompt;
+		});
+	}
+
 	transformRect() {}
 	transformEllipse() {}
 	transformText() {}
@@ -104,5 +111,20 @@ export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 		// shuffle(arr);
 
 		return arr;
+	}
+
+	async fetchImage() {
+		if (!this.state.prompt.trim()) return;
+
+		const res = await this.handleAsync("fetchImage", () =>
+			getImageService(this.state.prompt)
+		);
+
+		if (res) {
+			this.mutateState((v) => {
+				const id = generateId();
+				v.imgSrc[id] = res;
+			});
+		}
 	}
 }
