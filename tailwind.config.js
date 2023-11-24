@@ -8,6 +8,9 @@ module.exports = {
 				themePurple: "#6500E5",
 				darkGray: "#141414",
 			},
+			animation: {
+				"spin-slow": "spin 1000s ease-in-out infinite",
+			},
 		},
 	},
 	plugins: [],

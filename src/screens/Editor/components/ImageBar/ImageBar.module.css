@@ -1,0 +1,15 @@
+.textArea {
+  width: 100%;
+  background-color: black;
+  color: white;
+  max-height: 300px;
+  height: 200px;
+  border : 1px solid #3a3a3a;
+  padding: 12px;
+  font-size: 14px;
+  outline: none;
+}
+
+.textArea:focus {
+  outline: 1px solid #4a4a4a;
+}

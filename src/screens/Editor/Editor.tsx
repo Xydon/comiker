@@ -12,6 +12,7 @@ import {
 	RectComponentList,
 	TextComponentList,
 } from "./components/ComponentList/ComponentList";
+import ImageBar from "./components/ImageBar/ImageBar";
 
 interface ApplicationContextTypes {
 	state: EditorTypes.State;
@@ -33,6 +34,7 @@ function Editor() {
 		ellipse: {},
 		text: {},
 		selected: null,
+		image: {},
 		loading: {},
 	});
 
@@ -101,7 +103,7 @@ function Editor() {
 							}}
 						>
 							<Artboard
-								width={widthHandle.width*0.95}
+								width={widthHandle.width * 0.95}
 								height={800}
 								style={{ backgroundColor: "white" }}
 							/>
@@ -109,6 +111,7 @@ function Editor() {
 					</div>
 					<div className="basis-1/5 border-l border-l-[#323232]">
 						<SidebarHeader heading={"Images"} />
+						<ImageBar />
 					</div>
 				</div>
 			</div>
