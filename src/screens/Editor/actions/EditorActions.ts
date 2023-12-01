@@ -107,6 +107,12 @@ export default class EditorActions extends ServerStateUtils<EditorTypes.State> {
 		});
 	}
 
+	deleteRect(id: string) {
+		this.mutateState((v) => {
+			delete v.rectangle[id];
+		});
+	}
+
 	clubElements() {
 		const arr: { id: string; type: EditorTypes.Elements; color: string }[] = [];
 

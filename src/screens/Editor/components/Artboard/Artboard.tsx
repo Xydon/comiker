@@ -107,7 +107,9 @@ function Artboard(props: StageProps) {
 							onChange={function (arrt: ImageConfig): void {
 								actions.transformImage(v[0], arrt);
 							}}
-							onDelete={function (id?: string | undefined): void {}}
+							onDelete={function (id?: string | undefined): void {
+								if(id) actions.deleteRect(id);
+							}}
 							src={v[1].src}
 						/>
 					);
